@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev  # 활성화할 프로파일만 지정하는 것, 여기선 dev만 활성화한다는 뜻!
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher  # swagger2 문서 오류 때문에
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/coupon?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: root
+    password: 1111
+
+
+  jpa:
+    open-in-view: true # open-in-view: true 옵션은 성능상의 이슈가 있어서 false로 변경
+    hibernate:
+      ddl-auto: create # update, create, create-drop, validate, none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl  # 테이블명, 컬럼명을 자바와 동일하게 맞춰줌
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      dialect: org.hibernate.dialect.MySQL8Dialect
+
+logging:
+  level:
+    org.hibernate.SQL: info
